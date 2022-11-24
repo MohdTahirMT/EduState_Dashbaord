@@ -1,6 +1,6 @@
 // React components
 import { useState } from "react";
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next";
 
 // react-router-dom components
 import { Link, useNavigate } from "react-router-dom";
@@ -42,7 +42,7 @@ function Basic() {
   const [sbForgotSuccess, setSbForgotSuccess] = useState(false);
 
   // It is a hook imported from 'react-i18next'
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
 
   const sbForgotFn = () => setSbForgot(!sbForgot);
 
@@ -220,7 +220,7 @@ function Basic() {
             textAlign="center"
           >
             <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-            {t('sign_in')}
+              {t("sign_in")}
             </MDTypography>
             <Grid
               container
@@ -306,7 +306,7 @@ function Basic() {
                   textGradient
                   onClick={sbForgotFn}
                 >
-                  {t('forgot_password')}?
+                  {t("forgot_password")}?
                 </MDTypography>
               </MDBox>
               <MDBox mt={4} mb={1}>
@@ -322,7 +322,7 @@ function Basic() {
                     }
                   }}
                 >
-                  {t('sign_in')}
+                  {t("sign_in")}
                 </MDButton>
               </MDBox>
               <MDBox mt={3} mb={1} textAlign="center">
@@ -336,7 +336,7 @@ function Basic() {
                     fontWeight="medium"
                     textGradient
                   >
-                    {t('sign_up')}
+                    {t("sign_up")}
                   </MDTypography>
                 </MDTypography>
               </MDBox>

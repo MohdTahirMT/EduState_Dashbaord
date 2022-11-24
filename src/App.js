@@ -55,7 +55,6 @@ export default function App() {
   const { pathname } = useLocation();
 
   const language = useSelector(state => state.language.language);
-  console.log("language: " + language);
   localStorage.setItem("langauge_selected", language)
 
   // Open sidenav when mouse enter on mini sidenav

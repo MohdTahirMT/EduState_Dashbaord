@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Language_change } from "redux/actions";
 
 // react-router components
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -32,6 +32,7 @@ import breakpoints from "assets/theme/base/breakpoints";
 import { useMaterialUIController } from "context";
 
 function DefaultNavbar({ transparent, light, action }) {
+  const location = useLocation();
   const dispatcher = useDispatch();
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
@@ -67,6 +68,8 @@ function DefaultNavbar({ transparent, light, action }) {
           handleCloseLanguages();
           if (e.target.innerText === "English") {
             dispatcher(Language_change("en"));
+            let loc = "http://localhost:3000";
+            window.location.replace(loc + "?lng=en");
           }
         }}
         icon={<Icon>flag</Icon>}
@@ -78,6 +81,8 @@ function DefaultNavbar({ transparent, light, action }) {
           handleCloseLanguages();
           if (e.target.innerText === "Hindi") {
             dispatcher(Language_change("hi"));
+            let loc = "http://localhost:3000";
+            window.location.replace(loc + "?lng=hi");
           }
         }}
         disabled={defaultLanguages === "hi" ? true : false}
@@ -89,6 +94,8 @@ function DefaultNavbar({ transparent, light, action }) {
           handleCloseLanguages();
           if (e.target.innerText === "Bengali") {
             dispatcher(Language_change("bn"));
+            let loc = "http://localhost:3000";
+            window.location.replace(loc + "?lng=bn");
           }
         }}
         icon={<Icon>flag</Icon>}

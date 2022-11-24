@@ -115,6 +115,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
           handleCloseLanguages();
           if (e.target.innerText === "English") {
             dispatcher(Language_change("en"));
+            let loc = "http://localhost:3000";
+            window.location.replace(loc + "?lng=en");
           }
         }}
         disabled={defaultLanguages === "en" ? true : false}
@@ -126,6 +128,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
           handleCloseLanguages();
           if (e.target.innerText === "Hindi") {
             dispatcher(Language_change("hi"));
+            let loc = "http://localhost:3000";
+            window.location.replace(loc + "?lng=hi");
           }
         }}
         disabled={defaultLanguages === "hi" ? true : false}
@@ -137,6 +141,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
           handleCloseLanguages();
           if (e.target.innerText === "Bengali") {
             dispatcher(Language_change("bn"));
+            let loc = "http://localhost:3000";
+            window.location.replace(loc + "?lng=bn");
           }
         }}
         disabled={defaultLanguages === "bn" ? true : false}
