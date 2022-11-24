@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Language_change } from "redux/actions";
 
 // react-router components
 import { useLocation, useNavigate } from "react-router-dom";
@@ -40,6 +42,7 @@ import {
 
 function DashboardNavbar({ absolute, light, isMini }) {
   const navigate = useNavigate();
+  const dispatcher = useDispatch();
 
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useMaterialUIController();
@@ -50,8 +53,10 @@ function DashboardNavbar({ absolute, light, isMini }) {
     openConfigurator,
     darkMode,
   } = controller;
+
   const [openLanguages, setOpenLanguages] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
+
   const route = useLocation().pathname.split("/").slice(1);
 
   useEffect(() => {
@@ -90,6 +95,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const handleCloseLanguages = () => setOpenLanguages(false);
   const handleOpenProfile = (event) => setOpenProfile(event.currentTarget);
   const handleCloseProfile = () => setOpenProfile(false);
+  const defaultLanguages = localStorage.getItem("langauge_selected");
 
   // Render the Languages menu
   const renderLanguages = () => (
@@ -107,13 +113,36 @@ function DashboardNavbar({ absolute, light, isMini }) {
       <NotificationItem
         onClick={(e) => {
           handleCloseLanguages();
-          console.log(e.target.innerText);
+          if (e.target.innerText === "English") {
+            dispatcher(Language_change("en"));
+          }
         }}
+        disabled={defaultLanguages === "en" ? true : false}
         icon={<Icon>flag</Icon>}
         title="English"
       />
-      <NotificationItem icon={<Icon>flag</Icon>} title="Hindi" />
-      <NotificationItem icon={<Icon>flag</Icon>} title="Bengali" />
+      <NotificationItem
+        onClick={(e) => {
+          handleCloseLanguages();
+          if (e.target.innerText === "Hindi") {
+            dispatcher(Language_change("hi"));
+          }
+        }}
+        disabled={defaultLanguages === "hi" ? true : false}
+        icon={<Icon>flag</Icon>}
+        title="Hindi"
+      />
+      <NotificationItem
+        onClick={(e) => {
+          handleCloseLanguages();
+          if (e.target.innerText === "Bengali") {
+            dispatcher(Language_change("bn"));
+          }
+        }}
+        disabled={defaultLanguages === "bn" ? true : false}
+        icon={<Icon>flag</Icon>}
+        title="Bengali"
+      />
     </Menu>
   );
 

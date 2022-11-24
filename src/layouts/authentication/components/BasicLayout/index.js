@@ -17,7 +17,7 @@ import PageLayout from "examples/LayoutContainers/PageLayout";
 function BasicLayout({ image, children }) {
   return (
     <PageLayout>
-      <DefaultNavbar />
+      <DefaultNavbar action />
       <MDBox
         position="absolute"
         width="100%"

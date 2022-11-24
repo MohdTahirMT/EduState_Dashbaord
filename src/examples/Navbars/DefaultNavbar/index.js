@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Language_change } from "redux/actions";
 
 // react-router components
 import { Link } from "react-router-dom";
@@ -8,12 +10,16 @@ import PropTypes from "prop-types";
 
 // @mui material components
 import Container from "@mui/material/Container";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDButton from "components/MDButton";
+import NotificationItem from "examples/Items/NotificationItem";
+import { navbarIconButton } from "../DashboardNavbar/styles";
 
 // Material Dashboard 2 React example components
 import DefaultNavbarLink from "examples/Navbars/DefaultNavbar/DefaultNavbarLink";
@@ -26,15 +32,71 @@ import breakpoints from "assets/theme/base/breakpoints";
 import { useMaterialUIController } from "context";
 
 function DefaultNavbar({ transparent, light, action }) {
+  const dispatcher = useDispatch();
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
 
   const [mobileNavbar, setMobileNavbar] = useState(false);
   const [mobileView, setMobileView] = useState(false);
+  const [openLanguages, setOpenLanguages] = useState(false);
 
   const openMobileNavbar = ({ currentTarget }) =>
     setMobileNavbar(currentTarget.parentNode);
   const closeMobileNavbar = () => setMobileNavbar(false);
+
+  const handleOpenLanguages = (event) => setOpenLanguages(event.currentTarget);
+  const handleCloseLanguages = () => setOpenLanguages(false);
+
+  const defaultLanguages = localStorage.getItem("langauge_selected");
+
+  // Render the Languages menu
+  const renderLanguages = () => (
+    <Menu
+      anchorEl={openLanguages}
+      anchorReference={null}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "left",
+      }}
+      open={Boolean(openLanguages)}
+      onClose={handleCloseLanguages}
+      sx={{ mt: 2 }}
+    >
+      <NotificationItem
+        onClick={(e) => {
+          handleCloseLanguages();
+          if (e.target.innerText === "English") {
+            dispatcher(Language_change("en"));
+          }
+        }}
+        icon={<Icon>flag</Icon>}
+        disabled={defaultLanguages === "en" ? true : false}
+        title="English"
+      />
+      <NotificationItem
+        onClick={(e) => {
+          handleCloseLanguages();
+          if (e.target.innerText === "Hindi") {
+            dispatcher(Language_change("hi"));
+          }
+        }}
+        disabled={defaultLanguages === "hi" ? true : false}
+        icon={<Icon>flag</Icon>}
+        title="Hindi"
+      />
+      <NotificationItem
+        onClick={(e) => {
+          handleCloseLanguages();
+          if (e.target.innerText === "Bengali") {
+            dispatcher(Language_change("bn"));
+          }
+        }}
+        icon={<Icon>flag</Icon>}
+        disabled={defaultLanguages === "bn" ? true : false}
+        title="Bengali"
+      />
+    </Menu>
+  );
 
   useEffect(() => {
     // A function that sets the display state for the DefaultNavbarMobile.
@@ -60,6 +122,8 @@ function DefaultNavbar({ transparent, light, action }) {
     // Remove event listener on cleanup
     return () => window.removeEventListener("resize", displayMobileNavbar);
   }, []);
+
+  let token = localStorage.getItem("accessToken");
 
   return (
     <Container>
@@ -100,7 +164,7 @@ function DefaultNavbar({ transparent, light, action }) {
             fontWeight="bold"
             color={light ? "white" : "dark"}
           >
-            Material Dashboard 2
+            Edu-State Dashboard
           </MDTypography>
         </MDBox>
         <MDBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
@@ -110,52 +174,57 @@ function DefaultNavbar({ transparent, light, action }) {
             route="/dashboard"
             light={light}
           />
-          <DefaultNavbarLink
-            icon="person"
-            name="profile"
-            route="/profile"
-            light={light}
-          />
-          <DefaultNavbarLink
-            icon="account_circle"
-            name="sign up"
-            route="/sign-up"
-            light={light}
-          />
-          <DefaultNavbarLink
-            icon="key"
-            name="sign in"
-            route="/sign-in"
-            light={light}
-          />
+          {token ? (
+            ""
+          ) : (
+            <>
+              <DefaultNavbarLink
+                icon="account_circle"
+                name="sign up"
+                route="/sign-up"
+                light={light}
+              />
+              <DefaultNavbarLink
+                icon="key"
+                name="sign in"
+                route="/sign-in"
+                light={light}
+              />
+            </>
+          )}
         </MDBox>
         {action &&
           (action.type === "internal" ? (
             <MDBox display={{ xs: "none", lg: "inline-block" }}>
-              <MDButton
-                component={Link}
-                to={action.route}
-                variant="gradient"
-                color={action.color ? action.color : "info"}
+              <IconButton
                 size="small"
+                disableRipple
+                color="inherit"
+                sx={navbarIconButton}
+                aria-controls="notification-menu"
+                aria-haspopup="true"
+                variant="contained"
+                onClick={handleOpenLanguages}
               >
-                {action.label}
-              </MDButton>
+                <Icon>language</Icon>
+              </IconButton>
+              {renderLanguages()}
             </MDBox>
           ) : (
             <MDBox display={{ xs: "none", lg: "inline-block" }}>
-              <MDButton
-                component="a"
-                href={action.route}
-                target="_blank"
-                rel="noreferrer"
-                variant="gradient"
-                color={action.color ? action.color : "info"}
+              <IconButton
                 size="small"
-                sx={{ mt: -0.3 }}
+                disableRipple
+                color="inherit"
+                sx={navbarIconButton}
+                aria-controls="notification-menu"
+                aria-haspopup="true"
+                variant="contained"
+                onClick={handleOpenLanguages}
               >
-                {action.label}
-              </MDButton>
+                <Icon>language</Icon>
+              </IconButton>
+              {renderLanguages()}
             </MDBox>
           ))}
         <MDBox

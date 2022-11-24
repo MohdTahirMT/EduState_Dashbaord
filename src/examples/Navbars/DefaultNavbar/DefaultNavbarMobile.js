@@ -13,6 +13,8 @@ import DefaultNavbarLink from "examples/Navbars/DefaultNavbar/DefaultNavbarLink"
 function DefaultNavbarMobile({ open, close }) {
   const { width } = open && open.getBoundingClientRect();
 
+  let token = localStorage.getItem("accessToken");
+
   return (
     <Menu
       getContentAnchorEl={null}
@@ -35,13 +37,18 @@ function DefaultNavbarMobile({ open, close }) {
           name="dashboard"
           route="/dashboard"
         />
-        <DefaultNavbarLink icon="person" name="profile" route="/profile" />
-        <DefaultNavbarLink
-          icon="account_circle"
-          name="sign up"
-          route="/sign-up"
-        />
-        <DefaultNavbarLink icon="key" name="sign in" route="/sign-in" />
+        {token ? (
+          ""
+        ) : (
+          <>
+            <DefaultNavbarLink
+              icon="account_circle"
+              name="sign up"
+              route="/sign-up"
+            />
+            <DefaultNavbarLink icon="key" name="sign in" route="/sign-in" />
+          </>
+        )}
       </MDBox>
     </Menu>
   );

@@ -9,7 +9,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import MuiLink from "@mui/material/Link";
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
 // @mui icons
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -44,15 +43,8 @@ function Basic() {
 
   // It is a hook imported from 'react-i18next'
   const { t } = useTranslation(); 
-  const [lang, setLang] = useState("");
 
   const sbForgotFn = () => setSbForgot(!sbForgot);
-
-  const languages = [
-    { value: 'en', text: "English" },
-    { value: 'hi', text: "Hindi" },
-    { value: 'bn', text: "Bengali" }
-  ]
 
   // Validation
   const handleValidation = () => {
@@ -268,7 +260,7 @@ function Basic() {
               </Grid>
             </Grid>
           </MDBox>
-          <MDBox pt={4} pb={3} px={3}>
+          <MDBox pt={4} pb={1} px={3}>
             <MDBox component="form" role="form">
               <MDBox mb={2}>
                 <MDInput
@@ -317,25 +309,6 @@ function Basic() {
                   {t('forgot_password')}?
                 </MDTypography>
               </MDBox>
-              <FormControl>
-                <InputLabel id="language">Age</InputLabel>
-                <Select
-                  labelId="language"
-                  id="language"
-                  value={lang}
-                  label="Language"
-                  onChange={(e) => setLang(e.target.value)}
-                  autoWidth
-                >
-                  {
-                    languages?.map((lang) => {
-                      return(
-                        <MenuItem key={lang.value} value={lang.value}>{lang.text}</MenuItem>
-                      )
-                    })
-                  }
-                </Select>
-              </FormControl>
               <MDBox mt={4} mb={1}>
                 <MDButton
                   variant="gradient"

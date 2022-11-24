@@ -116,7 +116,7 @@ function Cover() {
         close={() => setShow(false)}
       />
       <CoverLayout image={bgImage}>
-        <Card style={{ marginTop: -85 }}>
+        <Card style={{ marginTop: -55 }}>
           <MDBox
             variant="gradient"
             bgColor="info"

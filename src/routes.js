@@ -30,7 +30,7 @@ const routes = [
     icon: <Icon fontSize="small">school</Icon>,
     route: "/teacher",
     component: <Teacher />,
-  }
+  },
 ];
 
 export default routes;

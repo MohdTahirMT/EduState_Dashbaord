@@ -31,6 +31,7 @@ import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import ResetPassword from "layouts/authentication/reset-password/";
 import ChangePassword from "layouts/authentication/change-password/";
+import Profile from "layouts/profile";
 
 // Images
 import brandWhite from "assets/images/logo-ct.png";
@@ -54,7 +55,7 @@ export default function App() {
   const { pathname } = useLocation();
 
   const language = useSelector(state => state.language.language);
-  console.log(language);
+  console.log("language: " + language);
   localStorage.setItem("langauge_selected", language)
 
   // Open sidenav when mouse enter on mini sidenav
@@ -132,7 +133,7 @@ export default function App() {
           <Sidenav
             color={sidenavColor}
             brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brandName="Edu State Admin Panel"
+            brandName="Edu-State Dashboard"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
@@ -146,6 +147,7 @@ export default function App() {
         <Route path="/" element={localStorage.getItem("accessToken") ? <Dashboard /> : <SignIn />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/change-password" element={<ChangePassword />} />
         {getRoutes(routes)}

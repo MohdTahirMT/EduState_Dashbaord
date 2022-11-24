@@ -18,7 +18,7 @@ import PageLayout from "examples/LayoutContainers/PageLayout";
 function CoverLayout({ coverHeight, image, children }) {
   return (
     <PageLayout>
-      <DefaultNavbar transparent light />
+      <DefaultNavbar action />
       <MDBox
         width="calc(100% - 2rem)"
         minHeight={coverHeight}
