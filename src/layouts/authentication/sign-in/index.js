@@ -1,7 +1,7 @@
 // React components
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-
+ 
 // react-router-dom components
 import { Link, useNavigate } from "react-router-dom";
 
@@ -29,6 +29,7 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 import bgImage from "assets/images/login.jpg";
 import { adminTeacherloginAPI } from "services/API";
 import { forgetpasswordAdminAPI } from "services/API";
+import { type } from "@testing-library/user-event/dist/type";
 
 function Basic() {
   const navigate = useNavigate();
@@ -135,23 +136,23 @@ function Basic() {
       <MDSnackbar
         color="success"
         icon="check"
-        title="Log In"
-        content="You are Logged in Successfully."
+        title={t("sign_in")}
+        content={t("login_success")}
         open={sbLogin}
         close={() => setSbLogin(false)}
       />
       <MDSnackbar
         color="success"
         icon="check"
-        title="Forgot Password"
-        content="Email sent successfully, Please check your mail inbox to reset the password."
+        title={t("forgot_password")}
+        content={t("forgot_email_sent")}
         open={sbForgotSuccess}
         close={() => setSbForgotSuccess(false)}
       />
       <MDSnackbar
         color="light"
         icon="lock"
-        title="Forgot Password"
+        title={t("forgot_password")}
         content={
           <>
             <MDBox pt={3} pb={3} px={3}>
@@ -161,13 +162,13 @@ function Basic() {
                 color="info"
                 mb={5}
               >
-                You will receive an e-mail in maximum 60 seconds
+                {t("forgot_link_time")}
               </MDTypography>
               <MDBox component="form" role="form">
                 <MDBox mb={4}>
                   <MDInput
                     type="email"
-                    label="Email"
+                    label={t("email")}
                     variant="standard"
                     focused
                     fullWidth
@@ -196,7 +197,7 @@ function Basic() {
                       }
                     }}
                   >
-                    reset
+                    {t("reset")}
                   </MDButton>
                 </MDBox>
               </MDBox>
@@ -265,7 +266,7 @@ function Basic() {
               <MDBox mb={2}>
                 <MDInput
                   type="email"
-                  label="Email"
+                  label={t("email")}
                   fullWidth
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -283,7 +284,7 @@ function Basic() {
               <MDBox mb={2}>
                 <MDInput
                   type="password"
-                  label="Password"
+                  label={t("password")}
                   fullWidth
                   onChange={(e) => setPassword(e.target.value)}
                 />

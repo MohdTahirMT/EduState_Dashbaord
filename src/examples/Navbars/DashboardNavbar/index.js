@@ -96,6 +96,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const handleOpenProfile = (event) => setOpenProfile(event.currentTarget);
   const handleCloseProfile = () => setOpenProfile(false);
   const defaultLanguages = localStorage.getItem("langauge_selected");
+  const token = localStorage.getItem("accessToken");
 
   // Render the Languages menu
   const renderLanguages = () => (
@@ -229,14 +230,18 @@ function DashboardNavbar({ absolute, light, isMini }) {
               <MDInput label="Search here" />
             </MDBox>
             <MDBox color={light ? "white" : "inherit"}>
-              <IconButton
-                sx={navbarIconButton}
-                size="small"
-                disableRipple
-                onClick={handleOpenProfile}
-              >
-                <Icon sx={iconsStyle}>account_circle</Icon>
-              </IconButton>
+              {token ? (
+                <IconButton
+                  sx={navbarIconButton}
+                  size="small"
+                  disableRipple
+                  onClick={handleOpenProfile}
+                >
+                  <Icon sx={iconsStyle}>account_circle</Icon>
+                </IconButton>
+              ) : (
+                ""
+              )}
               {renderProfile()}
               <IconButton
                 size="small"

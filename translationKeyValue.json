@@ -1,0 +1,13 @@
+{
+    "sign_in": "Sign In",
+    "forgot_password": "Forgot Password",
+    "have_not_account": "Don't have an account",
+    "sign_up": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "reset": "Reset",
+    "forgot_link_time": "You will receive an e-mail in maximum 60 seconds.",
+    "dashboard": "Dashboard",
+    "login_success": "You are signed in Successfully.",
+    "forgot_email_sent": "Email sent successfully, Please check your mail inbox to reset the password."
+}

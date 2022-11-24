@@ -11,7 +11,7 @@ i18next
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: localStorage.getItem("langauge_selected"),
+    fallbackLng: "en",
 
     ns: ["default"],
     defaultNS: "default",
