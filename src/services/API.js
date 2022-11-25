@@ -30,7 +30,10 @@ export const adminAcountDeactivateAPI = async (data) => {
 
 export const deleteAdminAPI = async (data) => {
   const token = localStorage.getItem("accessToken");
-  let response = await axios.post(`${baseUrl}/deleteAdmin`, data, {
+  let bodyData = {
+    id: data
+  }
+  let response = await axios.post(`${baseUrl}/deleteAdmin`, bodyData, {
     headers: { Authorization: "Bearer " + token },
   });
   return response;
